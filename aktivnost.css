@@ -1,0 +1,55 @@
+body{
+
+    background-color: lightsteelblue;
+}
+
+table {
+    border-spacing: 80px;
+    margin-top: 150px;
+  }
+
+div {
+    border: 2px solid steelblue;
+    color:steelblue;
+ 
+  
+   margin-bottom: 100px;
+    text-align: center;
+   
+    float: left;
+    margin-left: 40px;
+
+   
+  }
+div.pis{
+  border-radius: 75px;
+
+  height: 400px;
+  width: 30%;
+  margin-top: 200px;
+}
+
+
+ div.trenutna{
+  border-radius: 25px;
+
+    height: 500px;
+    width: 30%;
+  
+    margin-top: 100px;
+ }
+
+ p.naslov{
+
+font-size: 300%;
+
+ }
+
+ p.a{
+  color:steelblue;
+background-color: lightsteelblue;
+margin-top: -20px;
+width: 50%;
+margin-left: 25%;
+font-size: 25px;
+ }
