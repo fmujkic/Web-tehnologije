@@ -8,7 +8,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Open raspored.html",
-            "file": "c:\\Users\\fejsal\\wt20p18198\\aktivnost\\aktivnost.html"
+            "file": "c:\\Users\\fejsal\\wt20p18198\\raspored\\raspored.html"
         }
     ]
 }

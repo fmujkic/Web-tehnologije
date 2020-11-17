@@ -1,7 +1,5 @@
 table, th, td {
     border:  dashed 1px black;
-   
-
     border-collapse: collapse;
     background-color: gainsboro;
     
@@ -14,20 +12,52 @@ table, th, td {
   }
 
   td{
-
     column-width: 20px;
     height: 80px;
    
+    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+  }
+
+  td.popunjeno{
     text-align: center;
-
-  }
-
-  th.popunjeno{
-
     background-color: lavender;
-    border:  solid 1px black;
-
   }
+
+
+
+  td.puna{
+    border-left: solid 1px black;
+  }
+
+  td:last-child{
+    border-right: solid 1px black;
+  }
+
+  td.posebna{
+
+    border-top: solid 1px red;
+    border-left: solid 1px white;
+    border-bottom: solid 1px white;
+    background-color: white;
+    font-size: 200%;
+    text-align: right;
+
+   
+   
+  }
+
+ 
+
+  
+  th.n{
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-right: solid 1px white;
+    background-color: white;
+    text-align: right;
+  }
+
 
   .topnav {
     background-color: #333;
@@ -52,3 +82,5 @@ table, th, td {
     background-color: #4CAF50;
     color: white;
   }
+
+  
