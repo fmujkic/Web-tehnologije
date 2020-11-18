@@ -1,8 +1,16 @@
 
-label{
+label,select,input{
     width: 200px;
     display:inline-block;
 }
+
+#nazivPredmeta{
+width: 200px;
+display:inline-block;
+
+}
+
+
 body{
     text-align: center;
 }
@@ -12,9 +20,7 @@ form{
     display:inline-block;
 }
 
-#nazivPredmeta{
-    width: 100px;
-}
+
 
 .topnav {
     background-color: #333;
@@ -39,3 +45,15 @@ form{
     background-color: #4CAF50;
     color: white;
   }
+
+  
+@media only screen and (max-width: 600px) {
+ 
+
+  
+	label, input{
+		display: block;
+    width: 100%;
+   
+  }
+}

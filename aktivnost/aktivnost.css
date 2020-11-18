@@ -35,8 +35,6 @@ div.pis{
     float: left;
  }
 
- 
-
  p.naslov{
 
 font-size: 300%;
@@ -76,4 +74,18 @@ font-size: 25px;
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
+}
+
+@media only screen and (max-width: 600px) {
+ 
+	.pis:nth-child(2){
+  display: none;
+  }
+  
+  .pis:last-child{
+    clear: both;
+  }
+
+
+  
 }
