@@ -1,4 +1,4 @@
-function addTable(div,dani,satPocetak,satKraj) {
+function iscrtajRaspored(div,dani,satPocetak,satKraj) {
 
     if(satKraj<=satPocetak || satPocetak<0 || satPocetak>24 || satKraj<0 || satKraj>24){
       div.appendChild(document.createTextNode("Greska"));  
@@ -10,6 +10,7 @@ function addTable(div,dani,satPocetak,satKraj) {
     var myTableDiv = div;
 
     var table = document.createElement('TABLE');
+    table.setAttribute("id", "tabela");
     var tableBody = document.createElement('TBODY');
     table.appendChild(tableBody);
 
@@ -51,3 +52,30 @@ function addTable(div,dani,satPocetak,satKraj) {
     }
     myTableDiv.appendChild(table);
 }
+
+
+function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj,dan){
+
+    if(raspored==null || vrijemeKraj<=vrijemePocetak || vrijemePocetak<0 || vrijemePocetak>24 || vrijemeKraj<0 || vrijemeKraj>24)alert("Greska");
+
+
+    var row = raspored.getElementsByTagName("tr")[1];
+
+    for(var i=0;i<5;i++)
+    row.deleteCell(3);
+
+    
+   var cell=row.getElementsByTagName("td")[3];
+
+
+    cell.colSpan = "6" ;
+
+    cell.appendChild(document.createTextNode( naziv + tip));  
+
+    cell.setAttribute("class", "popunjeno");
+
+
+}
+
+
+

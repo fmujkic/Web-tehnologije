@@ -22,11 +22,11 @@ td {
 }
 
 
-
 td.popunjeno {
   
     text-align: center;
     background-color: lavender;
+    border: black 1px solid;
 }
 
 
