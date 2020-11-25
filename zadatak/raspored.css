@@ -1,0 +1,66 @@
+th,
+td {
+    border: dashed 1px black;
+    background-color: gainsboro;
+}
+
+table {
+    margin: auto;
+    margin-top: 150px;
+    border-collapse: collapse;
+}
+tr{
+ 
+  height: 80px;
+}
+
+td {
+    
+    width: 20px;
+    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+}
+
+
+
+td.popunjeno {
+  
+    text-align: center;
+    background-color: lavender;
+}
+
+
+td.posebna {
+    border-left: none;
+    border-bottom: solid 1px white;
+    background-color: white;
+    font-size: 200%;
+text-align: right;
+
+    border-top: none;
+   
+}
+
+th {
+    border-top: solid 1px white;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    text-align: right;
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+tr.naslov{
+
+    height: 10px;
+  }
+  
+td.puna {
+    border-left: solid 1px black;
+    border-top: solid 1px black;
+}
+
+td:last-child {
+    border-right: solid 1px black;
+}

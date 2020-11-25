@@ -1,26 +1,50 @@
-function addTable() {
-    var myTableDiv = document.getElementById("myDynamicTable");
-  
+function addTable(div,dani,satPocetak,satKraj) {
+
+    
+    var myTableDiv = div;
+
     var table = document.createElement('TABLE');
-    table.style.border = '1px solid black';
-    table.style.borderCollapse = "collapse";
-  
+
+    var t=dani.length;
+
     var tableBody = document.createElement('TBODY');
+
     table.appendChild(tableBody);
-  
-    for (var i = 0; i < 5; i++) {
-      var tr = document.createElement('TR');
-      tableBody.appendChild(tr);
-  
-      for (var j = 0; j < 26; j++) {
-        var td = document.createElement('TD');
-        td.width = '20';
-        td.height='75';
-        td.style.border = '1px solid black';
-        td.style.borderCollapse = "collapse";
-        td.appendChild(document.createTextNode("Cell " + i + "," + j));
-        tr.appendChild(td);
-      }
+
+    var tr = document.createElement('TR');
+    tr.setAttribute("class", "naslov");
+    tableBody.appendChild(tr);
+    for (var j = 0; j < 14; j++) {
+        var th = document.createElement('TH');
+        if(j>0){
+            th.setAttribute("colspan", "2");
+        }
+        
+        if(j%2==1){
+            th.appendChild(document.createTextNode((j+7)+":00"));
+        }
+        tr.appendChild(th);
+    }
+
+    for (var i = 0; i < t; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        for (var j = 0; j < 27; j++) {
+            var td = document.createElement('TD');
+
+            if (j == 0) {
+                var td = document.createElement('TD');
+                td.setAttribute("class", "posebna");
+                td.appendChild(document.createTextNode(dani[i]));
+            }
+
+            else if (j % 2 == 1) {
+                td.style.borderLeft = '1px solid black';
+            }
+            // td.appendChild(document.createTextNode("Cell " + i + "," + j));
+            tr.appendChild(td);
+        }
     }
     myTableDiv.appendChild(table);
-  }
+}
