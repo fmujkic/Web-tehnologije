@@ -26,7 +26,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 
     var h=j + satPocetak - 1;
 
-        if ((h<13 && h % 2 == 0) || (h>13 && h % 2 == 1 )){
+        if (h!=satKraj && (h<13 && h % 2 == 0) || (h>13 && h % 2 == 1 )){
             th.appendChild(document.createTextNode((h) + ":00"));
             th.setAttribute("id", satPocetak);
         }
@@ -81,14 +81,19 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
        if( row.getElementsByTagName("td")[c].colSpan>1){
        q-=row.getElementsByTagName("td")[c].colSpan-1;
        }
-       if(c>q)alert("Sranje");
+       if(c>q)alert("Greska");
     }
 
 
+  
    
 
-    for (var i = 0; i < p-1; i++)
+    for (var i = 0; i < p-1; i++){
+
+        if(row.getElementsByTagName("td")[q].colSpan>1)alert("Greska");
         row.deleteCell(q);
+    }
+        
 
 
     var cell = row.getElementsByTagName("td")[q];
