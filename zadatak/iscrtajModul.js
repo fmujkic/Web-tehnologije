@@ -8,7 +8,7 @@ var Operacije = (function () {
             return;
         }
 
-        r = satKraj - satPocetak;
+        var r = satKraj - satPocetak;
 
         var myTableDiv = div;
 
@@ -109,9 +109,6 @@ var Operacije = (function () {
 
 
     }
-
-
-
 
     return {
         iscrtajRaspored: iscrtajRaspored,

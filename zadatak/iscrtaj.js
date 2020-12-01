@@ -5,7 +5,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
         return;
     }
 
-    r = satKraj - satPocetak;
+    var r = satKraj - satPocetak;
 
     var myTableDiv = div;
 
