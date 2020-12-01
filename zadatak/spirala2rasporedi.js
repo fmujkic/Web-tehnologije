@@ -1,5 +1,5 @@
 let okvir = document.getElementById('okvir');
-iscrtajRaspored(okvir,['Ponedjeljak','Utorak','Srijeda','Četvrtak','Petak','subota','konj'],8,24);
+iscrtajRaspored(okvir,['Ponedjeljak','Utorak','Srijeda','Četvrtak','Petak'],8,24);
  dodajAktivnost(okvir,'WT','predavanje',9,12,'Ponedjeljak');
  dodajAktivnost(okvir,'WT','vježbe',12,13.5,'Ponedjeljak');
 dodajAktivnost(okvir,'RMA','predavanje',14,17,'Ponedjeljak');

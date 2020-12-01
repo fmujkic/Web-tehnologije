@@ -2,7 +2,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 
     if (satKraj <= satPocetak || satPocetak < 0 || satPocetak > 24 || satKraj < 0 || satKraj > 24) {
         div.appendChild(document.createTextNode("Greska"));
-        return;
+        return ("Greska");
     }
 
     var r = satKraj - satPocetak;
@@ -10,8 +10,15 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
     var myTableDiv = div;
 
     var table = document.createElement('TABLE');
-    table.setAttribute("id", "tabela");
+
+    var a = div.getElementsByTagName("table").length;
+
+
+    table.setAttribute("id", a);
     var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+
     table.appendChild(tableBody);
 
 
@@ -28,14 +35,15 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 
         if (h != satKraj && (h < 13 && h % 2 == 0) || (h > 13 && h % 2 == 1)) {
             th.appendChild(document.createTextNode((h) + ":00"));
-            th.setAttribute("id", satPocetak);
+
         }
+        th.setAttribute("id", h);
         tr.appendChild(th);
     }
 
     for (var i = 0; i < dani.length; i++) {
         var tr = document.createElement('TR');
-        tr.setAttribute("id", dani[i])
+        tr.setAttribute("id", dani[i] + a)
         tableBody.appendChild(tr);
 
         for (var j = 0; j < r * 2 + 1; j++) {
@@ -66,34 +74,71 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
 
     if (raspored == null || vrijemeKraj <= vrijemePocetak || vrijemePocetak < 0 || vrijemePocetak > 24 || vrijemeKraj < 0 || vrijemeKraj > 24) alert("Greska");
 
+        
 
-    var satPocetak = document.getElementsByTagName("th")[1].id;
+        let tabele = raspored.getElementsByTagName("table");
+        let brTabele =tabele.length-1;
 
-    var row = document.getElementById(dan);
+    
+        if(brTabele == -1) return("Tabela ne postoji");
+    
+        var pom = dan + brTabele;
 
-    var p = (vrijemeKraj - vrijemePocetak) * 2;
+        var row = document.getElementById(pom);
+        var satPocetak = document.getElementsByTagName("th")[1].id;
+        var satKraj = document.getElementsByTagName("tr")[0].lastChild.id;
 
-
-    var q = (vrijemePocetak - satPocetak) * 2 + 1
-
-    for (var c = 0; c <= q; c++) {
-
-        if (row.getElementsByTagName("td")[c].colSpan > 1) {
-            q -= row.getElementsByTagName("td")[c].colSpan - 1;
+        
+    if(vrijemePocetak<satPocetak ||vrijemeKraj<satPocetak ||vrijemePocetak>satKraj ||vrijemeKraj>satKraj) return("Taj sat ne postoji");
+        
+    
+        
+        if(row == null) return("Taj dan ne postoji");
+    
+        var p = (vrijemeKraj - vrijemePocetak) * 2;
+    
+    
+        var q = (vrijemePocetak - satPocetak) * 2 + 1
+    
+        for (var c = 0; c <= q; c++) {
+    
+            if (row.getElementsByTagName("td")[c].colSpan > 1) {
+                q -= row.getElementsByTagName("td")[c].colSpan - 1;
+            }
+            if (c > q) {
+                alert("Greska");
+                return("Dodana aktivnost na zauzeto mjesto");
+            }
         }
-        if (c > q) alert("Greska");
-    }
+    
+        for (var i = q; i < p + q; i++) {
+    
+            if (row.getElementsByTagName("td")[i].colSpan > 1) {
+                alert("Greska");
+                return("Dodana aktivnost na zauzeto mjesto");
+            }
+        }
+        for (var i = 0; i < p - 1; i++) {
+    
+           
+            row.deleteCell(q);
+        }
+        var cell = row.getElementsByTagName("td")[q];
+        cell.colSpan = p;
+    
+        
+        
+    
+        var br = document.createElement("br");
+    
+            cell.appendChild(document.createTextNode(naziv));
+            cell.appendChild(br);
+            cell.appendChild(document.createTextNode(tip));
+    
+        
+    
+        cell.setAttribute("class", "popunjeno");
 
-    for (var i = 0; i < p - 1; i++) {
-
-        if (row.getElementsByTagName("td")[q].colSpan > 1) alert("Greska");
-        row.deleteCell(q);
-    }
-
-    var cell = row.getElementsByTagName("td")[q];
-    cell.colSpan = p;
-    cell.appendChild(document.createTextNode(naziv + tip));
-    cell.setAttribute("class", "popunjeno");
 
 
 }
