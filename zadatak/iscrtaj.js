@@ -24,9 +24,9 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             th.setAttribute("colspan", "2");
         }
 
-    var h=j + satPocetak - 1;
+        var h = j + satPocetak - 1;
 
-        if (h!=satKraj && (h<13 && h % 2 == 0) || (h>13 && h % 2 == 1 )){
+        if (h != satKraj && (h < 13 && h % 2 == 0) || (h > 13 && h % 2 == 1)) {
             th.appendChild(document.createTextNode((h) + ":00"));
             th.setAttribute("id", satPocetak);
         }
@@ -44,7 +44,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             if (j == 0) {
                 var td = document.createElement('TD');
                 td.setAttribute("class", "posebna");
-                
+
                 td.appendChild(document.createTextNode(dani[i]));
             }
 
@@ -52,9 +52,9 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                 td.style.borderLeft = '1px solid black';
             }
 
-             if(j==1){
+            if (j == 1) {
                 td.setAttribute("class", satPocetak);
-             }
+            }
             tr.appendChild(td);
         }
     }
@@ -71,38 +71,28 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
 
     var row = document.getElementById(dan);
 
-    var p = (vrijemeKraj-vrijemePocetak)*2;
+    var p = (vrijemeKraj - vrijemePocetak) * 2;
 
-   
-    var q=(vrijemePocetak-satPocetak)*2+1
 
-    for(var c = 0; c <= q; c++){
+    var q = (vrijemePocetak - satPocetak) * 2 + 1
 
-       if( row.getElementsByTagName("td")[c].colSpan>1){
-       q-=row.getElementsByTagName("td")[c].colSpan-1;
-       }
-       if(c>q)alert("Greska");
+    for (var c = 0; c <= q; c++) {
+
+        if (row.getElementsByTagName("td")[c].colSpan > 1) {
+            q -= row.getElementsByTagName("td")[c].colSpan - 1;
+        }
+        if (c > q) alert("Greska");
     }
 
+    for (var i = 0; i < p - 1; i++) {
 
-  
-   
-
-    for (var i = 0; i < p-1; i++){
-
-        if(row.getElementsByTagName("td")[q].colSpan>1)alert("Greska");
+        if (row.getElementsByTagName("td")[q].colSpan > 1) alert("Greska");
         row.deleteCell(q);
     }
-        
-
 
     var cell = row.getElementsByTagName("td")[q];
-
-
     cell.colSpan = p;
-
     cell.appendChild(document.createTextNode(naziv + tip));
-
     cell.setAttribute("class", "popunjeno");
 
 

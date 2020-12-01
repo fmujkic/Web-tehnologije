@@ -5,7 +5,7 @@ var Operacije = (function () {
 
         if (satKraj <= satPocetak || satPocetak < 0 || satPocetak > 24 || satKraj < 0 || satKraj > 24) {
             div.appendChild(document.createTextNode("Greska"));
-            return;
+            return("Greska");
         }
 
         var r = satKraj - satPocetak;
@@ -31,8 +31,9 @@ var Operacije = (function () {
 
             if (h != satKraj && (h < 13 && h % 2 == 0) || (h > 13 && h % 2 == 1)) {
                 th.appendChild(document.createTextNode((h) + ":00"));
-                th.setAttribute("id", satPocetak);
+                
             }
+            th.setAttribute("id", h);
             tr.appendChild(th);
         }
 
