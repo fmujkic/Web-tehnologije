@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/planiranjeNastavnik.css" />
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="planiranjeNastavnik">Planiranje nastavnik</a>
+        <a href="podaciStudent">Podaci student</a>
+        <a href="raspored">Raspored</a>
+        <a href="aktivnost">Aktivnost</a>
+      </div>
+
+
+    <form action="/action_page.php">
+        <label for="nazivPredmeta">Naziv predmeta: </label>
+        <input type="text" id="nazivPredmeta" name="nazivPredmeta"><br><br>
+
+
+        <label for="vrijednosti">Vrijednosti:</label>
+        <select id="vrijednosti" name="vrijednosti">
+            <option value="predavanje">Predavanje</option>
+            <option value="vjezbe">Vjezbe</option>
+        </select><br><br>
+
+        <label for="vrijemePocetka">Vrijeme pocetka: </label>
+        <input type="time" id="vrijemePocetka" name="vrijemePocetka"><br><br>
+        <label for="vrijemeKraja">Vrijeme kraja: </label>
+        <input type="time" id="vrijemeKraja" name="vrijemeKraja"><br><br>
+
+
+        <label for="dani">Dan u sedmici:</label>
+        <select id="dani" name="dani">
+            <option value="p">Ponedjeljak</option>
+            <option value="u">Utorak</option>
+            <option value="s">Srijeda</option>
+            <option value="c">Cetvrtak</option>
+            <option value="t">Petak</option>
+            <option value="s">Subota</option>
+            <option value="n">Nedelja</option>
+
+        </select><br><br>
+
+
+
+    </form>
+
+
+
+</body>
+
+</html>
