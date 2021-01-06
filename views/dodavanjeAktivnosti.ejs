@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+<div>
+
+    <p> <%= JSON.stringify(podaci) %> </p>
+
+
+        <form  method="POST" action="/aktivnosti">
+        <label for="nazivPredmeta">Naziv predmeta: </label>
+        <input type="text"  name="nazivPredmeta"><br><br>
+
+
+        <label for="vrijednosti">Vrijednosti:</label>
+        <select id="vrijednosti" name="vrijednosti">
+            <option value="predavanje">Predavanje</option>
+            <option value="vjezbe">Vjezbe</option>
+        </select><br><br>
+
+        <label for="vrijemePocetka">Vrijeme pocetka: </label>
+        <input type="time"  name="vrijemePocetka"><br><br>
+        <label for="vrijemeKraja">Vrijeme kraja: </label>
+        <input type="time"  name="vrijemeKraja"><br><br>
+
+
+        <label for="dan">Dan u sedmici:</label>
+        <select id="dan" name="dan">
+            <option value="Ponedjeljak">Ponedjeljak</option>
+            <option value="Utorak">Utorak</option>
+            <option value="Srijeda">Srijeda</option>
+            <option value="Cetvrtak">Cetvrtak</option>
+            <option value="Petak">Petak</option>
+            <option value="Subota">Subota</option>
+            <option value="Nedelja">Nedelja</option>
+
+        </select><br><br>
+        <input type="submit" value ="submit"/> 
+
+    </form>
+
+<!--<ul>
+<% for(var i=0; i < podaci.length; i++){ %>
+<li><%= podaci[i].naziv %></li>
+<% } %> 
+</ul>-->
+
+
+
+
+        </div>
+    </body>
+</html>

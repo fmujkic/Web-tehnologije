@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+<div>
+
+    <p> <%= JSON.stringify(podaci) %> </p>
+
+        <form  method="POST" action="/predmeti">
+            <label for="predmet">Predmet:</label><br>
+            <input type="text"  name="naziv"  placeholder="Dodaj predmet" required><br>
+            <input type="submit" value ="submit"/> 
+          </form>
+
+<!--<ul>
+<% for(var i=0; i < podaci.length; i++){ %>
+<li><%= podaci[i].naziv %></li>
+<% } %> 
+</ul>-->
+
+
+
+
+        </div>
+    </body>
+</html>

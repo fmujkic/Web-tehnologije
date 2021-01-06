@@ -1,31 +1,35 @@
-var express = require ('express');
-var rasporedController = require('./controlers/rasporedController');
-var aktivnostController = require('./controlers/aktivnostController');
-var planiranjeNastavnikController = require('./controlers/planiranjeNastavnikConroller');
-var podaciStudentController = require('./controlers//podaciStudentController');
+var express = require('express');
+
+var zadatak1 = require('./controlers/zadatak1')
+var zadatak2 = require('./controlers/zadatak2')
+
+
+
+
 
 var app = express();
 
 
-
 //postavljanje template engina
 app.set('view engine', 'ejs');
+//app.use(bodyParser.urlencoded({ extended: false }))
+
+
 
 //staticni fileovi
-app.use('/assets',express.static('assets'));
-//app.use('/views',express.static('views'));
-//app.use('/controlers',express.static('controlers'));
+app.use('/assets', express.static('assets'));
+
 
 
 
 //pokretanje kontrolera
 
-rasporedController(app);
-aktivnostController(app);
-planiranjeNastavnikController(app);
-podaciStudentController(app);
+zadatak1(app);
+zadatak2(app);
 
-
+//predmetiController(app);
+//dodavanjeAktivnostiController(app);
+//novi(app);
 
 
 //slusanje porta
