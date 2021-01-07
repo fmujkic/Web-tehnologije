@@ -75,7 +75,7 @@ module.exports = function(app) {
                 return console.log(err);
             }
             const ispis = data.toString();
-            let pom = data.toString('utf-8').split("\r\n");
+            let pom = data.toString('utf-8').split("\n");
             let imenik = [];
 
 
@@ -83,7 +83,7 @@ module.exports = function(app) {
             for (let i = 0; i < pom.length; i++) {
                 let pom1 = pom[i].split(",");
                 let neko = { naziv: pom1[0], tip: pom1[1], pocetak: pom1[2], kraj: pom1[3], dan: pom1[4] };
-                if (predmetZaCrome == pom1[0])
+                if (predmet == pom1[0])
                     imenik.push(neko);
             }
 
@@ -123,8 +123,10 @@ module.exports = function(app) {
                 }
             }
 
+
+
             if (postoji == 0) {
-                imenik.push(req.body);
+
 
                 fs.writeFile(process.cwd() + '/predmeti.txt', data + '\n' + req.body['naziv'], function(err) {
                     if (err) return console.log(err);
@@ -133,7 +135,6 @@ module.exports = function(app) {
                 poruka = "Uspješno dodan predmet!";
             }
             res.json({ message: poruka });
-
 
 
         });
@@ -172,7 +173,7 @@ module.exports = function(app) {
 
             if (greska == 0) {
 
-                fs.writeFile(process.cwd() + '/aktivnosti.txt', data + '\n' + req.body['naziv'] + "," + req.body['tip'] + "," + req.body['vrijemePocetka'] + "," + req.body['vrijemeKraja'] + "," + req.body['dan'], function(err) {
+                fs.writeFile(process.cwd() + '/aktivnosti.txt', data + '\n' + req.body['naziv'] + "," + req.body['tip'] + "," + req.body['pocetak'] + "," + req.body['kraj'] + "," + req.body['dan'], function(err) {
                     if (err) return console.log(err);
                 });
                 console.log("Uspješno dodana aktivnost!");

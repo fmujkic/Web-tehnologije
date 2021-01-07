@@ -1,5 +1,3 @@
-OOI
-RPR
-VVS
-OE
-vis
+naziv
+IM5
+OIS

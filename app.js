@@ -10,11 +10,12 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(bodyParser.json());
+app.use(express.json());
 
 
 //postavljanje template engina
 app.set('view engine', 'ejs');
-//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
 
@@ -36,5 +37,5 @@ zadatak4(app);
 
 
 //slusanje porta
-app.listen(3000);
+module.exports = app.listen(3000);
 console.log('Slusanje porta 3000');

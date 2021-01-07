@@ -5,3 +5,7 @@ The Dark Knight,predavanje,18:50,19:50,nedjelja
 DM,predavanje,18:52,19:53,srijeda
 lag,vjezbe,18:52,19:53,ponedjeljak
 vis,predavanje,11:12,12:12,utorak
+undefined,undefined,undefined,undefined,undefined
+IM5,predavanje,undefined,undefined,utorak
+IM5,predavanje,10,11,utorak
+OIS,predavanje,undefined,undefined,cetvrtak
