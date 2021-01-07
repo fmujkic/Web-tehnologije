@@ -142,6 +142,8 @@ module.exports = function(app) {
 
 
     app.post('/aktivnost', urlencodedParser, function(req, res) {
+
+
         let greska = 0;
         fs.readFile(process.cwd() + '/assets/aktivnosti.txt', 'utf8', function(err, data) {
             if (err) {

@@ -2,7 +2,7 @@ var express = require('express');
 
 var zadatak1 = require('./controlers/zadatak1')
 var zadatak2 = require('./controlers/zadatak2')
-
+var zadatak4 = require('./controlers/zadatak4')
 
 
 
@@ -26,6 +26,7 @@ app.use('/assets', express.static('assets'));
 
 zadatak1(app);
 zadatak2(app);
+zadatak4(app);
 
 //predmetiController(app);
 //dodavanjeAktivnostiController(app);
