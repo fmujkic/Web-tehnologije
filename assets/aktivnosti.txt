@@ -1,8 +1,0 @@
-OOI,Predavanje,10,12,Srijeda
-RPR,Predavanje,13,15,Srijeda
-RPR,Predavanje,13,15,Petak
-RPR,Predavanje,14,15,Nedelja
-VVS,vjezbe,09:00,10:00,Ponedjeljak
-VVS,vjezbe,09:00,10:00,Ponedjeljak
-VVS,vjezbe,09:00,10:00,Ponedjeljak
-DM,predavanje,18:00,19:00,Subota

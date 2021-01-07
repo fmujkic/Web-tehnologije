@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<HTML lang="en">
+
+<HEAD>
+    <TITLE>Zadatak 4</TITLE>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" type="text/css" href="unosRasporeda.css">
+    <meta charset="UTF-8">
+</HEAD>
+
+<body>
+    <form id="formaAktivnost">
+
+
+
+        <label for="nazivPredmeta">Naziv predmeta:</label>
+
+        <br>
+
+        <input id="nazivPredmeta" type="text" name="naziv">
+
+        <br><br>
+
+        <label for="tip">Oblik nastave:</label>
+
+
+        <br><select name="tip" id="tip">
+                            <option value="predavanje">predavanje</option>
+                            <option value="vjezbe">vježbe</option>
+                        </select>
+
+
+        <br> <br><label for="pocetakV">Vrijeme početka:</label>
+
+        <br><input type="time" id="pocetakV" name="vrijemePocetka" min="00:00" max="23:59">
+
+
+        <br> <br><label for="krajV">Vrijeme kraja:</label>
+
+        <br><br><input type="time" id="krajV" name="vrijemeKraja" min="00:00" max="23:59">
+
+
+        <br><label for="danSedmica">Dan u sedmici:</label>
+
+        <br><br>
+        <select name="dan" id="danSedmica">
+                            <option value="ponedjeljak">ponedjeljak</option>
+                            <option value="utorak">utorak</option>
+                            <option value="srijeda">srijeda</option>
+                            <option value="cetvrtak">četvrtak</option>
+                            <option value="petak">petak</option>
+                            <option value="subota">subota</option>
+                            <option value="nedjelja">nedjelja</option>
+                        </select>
+
+
+
+        <br>
+        <button id="btnAktivnost" onclick="dodaj('aktivnost')">Dodaj aktivnost</button>
+
+
+        <br>
+
+
+
+        <br><br>
+    </form>
+
+    <ul id="listaPredmeti">
+    </ul>
+    <br>
+    <ul id="listaAktivnosti">
+    </ul>
+
+    <script type="text/javascript">
+        function ucitajPredmete() {
+            let ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var jsonRez = JSON.parse(ajax.responseText);
+                    listaPredmeti = document.getElementById("listaPredmeti")
+                    while (listaPredmeti.firstChild) listaPredmeti.removeChild(listaPredmeti.firstChild);
+
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'];
+                        listaPredmeti.appendChild(li);
+                    });
+                }
+            };
+            ajax.open("GET", "http://localhost:3000/predmeti", true);
+            ajax.setRequestHeader("Content-Type", "application/json");
+            ajax.send();
+        }
+
+        function ucitajAktivnosti() {
+            let ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var jsonRez = JSON.parse(ajax.responseText);
+                    listaAktivnosti = document.getElementById("listaAktivnosti")
+                    while (listaAktivnosti.firstChild) listaAktivnosti.removeChild(listaAktivnosti.firstChild);
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'] + "," + red['tip'] + "," + red['pocetak'] + "," + red['kraj'] + "," + red['dan'];
+                        listaAktivnosti.appendChild(li);
+                    });
+                }
+            };
+            ajax.open("GET", "http://localhost:3000/aktivnosti", true);
+            ajax.setRequestHeader("Content-Type", "application/json");
+            ajax.send();
+        }
+
+        function dodaj(nastavakURL) {
+            let ajax = new XMLHttpRequest();
+            const formData = new FormData(document.getElementById("formaAktivnost"));
+            var obj = {};
+            formData.forEach(function(value, key) {
+                obj[key] = value;
+            });
+            var json = JSON.stringify(obj);
+            ajax.open("POST", "http://localhost:3000/" + nastavakURL, true);
+            ajax.setRequestHeader("Content-type", "application/json");
+            ajax.send(json);
+            ucitajAktivnosti();
+        }
+
+        window.onload = function() {
+            ucitajPredmete();
+            ucitajAktivnosti();
+        };
+    </script>
+</body>
+
+</HTML>

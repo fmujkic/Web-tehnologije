@@ -1,0 +1,7 @@
+OOI,Predavanje,10,12,Srijeda
+IF1,predavanje,10:00,11:00,Petak
+OE,predavanje,10:00,15:00,subota
+The Dark Knight,predavanje,18:50,19:50,nedjelja
+DM,predavanje,18:52,19:53,srijeda
+lag,vjezbe,18:52,19:53,ponedjeljak
+vis,predavanje,11:12,12:12,utorak

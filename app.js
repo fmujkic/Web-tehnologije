@@ -5,9 +5,11 @@ var zadatak2 = require('./controlers/zadatak2')
 var zadatak4 = require('./controlers/zadatak4')
 
 
+var bodyParser = require('body-parser');
 
 
 var app = express();
+app.use(bodyParser.json());
 
 
 //postavljanje template engina
