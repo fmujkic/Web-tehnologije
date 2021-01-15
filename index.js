@@ -9,6 +9,9 @@ app.use(express.json());
 
 
 
+const ruteStare = require('./routes/stareRute');
+app.use("/v1", ruteStare);
+
 const rute = require('./routes/sveRute');
 app.use("/v2", rute);
 
