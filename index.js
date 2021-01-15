@@ -1,14 +1,21 @@
 var express = require('express');
 var app = express();
-
-
-
 const db = require('./models');
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+
+
+const rute = require('./routes/sveRute');
+app.use("/v2", rute);
 
 
 
 db.sequelize.sync().then((req) => {
-    app.listen(3002, () => {
+    app.listen(3006, () => {
         console.log('Server pokrenut');
     });
 });

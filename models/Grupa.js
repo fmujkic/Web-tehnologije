@@ -1,5 +1,3 @@
-const { PassThrough } = require("stream");
-
 module.exports = (sequelize, DataTypes) => {
     const Grupa = sequelize.define("Grupa", {
 
@@ -11,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
 
 
     Grupa.associate = models => {
-        Grupa.belongsTo(models.Predmet);
+        Grupa.belongsTo(models.Predmet, {
+            foreignKey: {
+                allowNull: false
+            },
+            onDelete: "cascade"
+        });
         Grupa.belongsToMany(models.Student, { through: 'GrupaStudent' });
     }
 

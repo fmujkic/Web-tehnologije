@@ -26,10 +26,30 @@ module.exports = (sequelize, DataTypes) => {
 
     Aktivnost.associate = models => {
 
-        Aktivnost.belongsTo(models.Predmet);
-        Aktivnost.belongsTo(models.Grupa);
-        Aktivnost.belongsTo(models.Dan);
-        Aktivnost.belongsTo(models.Tip);
+        Aktivnost.belongsTo(models.Predmet, {
+            foreignKey: {
+                allowNull: false
+            },
+            onDelete: "cascade"
+        });
+        Aktivnost.belongsTo(models.Grupa, {
+            foreignKey: {
+                allowNull: false
+            },
+            onDelete: "cascade"
+        });
+        Aktivnost.belongsTo(models.Dan), {
+            foreignKey: {
+                allowNull: false
+            },
+            onDelete: "cascade"
+        };
+        Aktivnost.belongsTo(models.Tip, {
+            foreignKey: {
+                allowNull: false
+            },
+            onDelete: "cascade"
+        });
     }
 
     return Aktivnost;
