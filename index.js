@@ -18,7 +18,7 @@ app.use("/v2", rute);
 
 
 db.sequelize.sync().then((req) => {
-    app.listen(3006, () => {
+    app.listen(3007, () => {
         console.log('Server pokrenut');
     });
 });

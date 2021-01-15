@@ -12,8 +12,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post("/predmet", (req, res) => {
 
     db.Predmet.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Predmet je kreiran"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Predmet je kreiran"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 
 });
 
@@ -29,20 +33,28 @@ router.get("/predmet", (req, res) => {
 
 router.put("/predmet", (req, res) => {
     db.Predmet.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("Predmet je izmijenjen"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Predmet je izmijenjen"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/predmet/:id", (req, res) => {
     db.Predmet.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Predmet je obrisan"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Predmet je obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -52,8 +64,12 @@ router.delete("/predmet/:id", (req, res) => {
 router.post("/tip", (req, res) => {
 
     db.Tip.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Tip je kreiran"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Tip je kreiran"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 
 });
 
@@ -69,20 +85,28 @@ router.get("/tip", (req, res) => {
 
 router.put("/tip", (req, res) => {
     db.Tip.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("Tip je izmijenjen"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Tip je izmijenjen"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/tip/:id", (req, res) => {
     db.Tip.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Tip je obrisan"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Tip je obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -90,8 +114,12 @@ router.delete("/tip/:id", (req, res) => {
 
 router.post("/dan", (req, res) => {
     db.Dan.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Dan obrisan"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Dan obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -106,20 +134,28 @@ router.get("/dan", (req, res) => {
 
 router.put("/dan", (req, res) => {
     db.Dan.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("Dan je izmijenjen"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Dan je izmijenjen"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/dan/:id", (req, res) => {
     db.Tip.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Dan je obrisan"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Dan je obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -127,8 +163,12 @@ router.delete("/dan/:id", (req, res) => {
 
 router.post("/aktivnost", (req, res) => {
     db.Aktivnost.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Aktivnost je kreirana"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Aktivnost je kreirana"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -137,26 +177,38 @@ router.get("/aktivnost", (req, res) => {
         res.send(aktivnosti);
     }).catch((err) => {
         if (err)
-            console.log(err);
+            console.log(err)
+            .catch((err) => {
+                if (err)
+                    console.log(err);
+            });
     });
 });
 
 router.put("/aktivnost", (req, res) => {
     db.Aktivnost.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("Aktivnost je izmijenjena"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Aktivnost je izmijenjena"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/aktivnost/:id", function(req, res) {
     db.Aktivnost.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Aktivnost je obrisana"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Aktivnost je obrisana"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -165,8 +217,12 @@ router.delete("/aktivnost/:id", function(req, res) {
 router.post("/grupa", (req, res) => {
 
     db.Grupa.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Grupa je kreirana"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Grupa je kreirana"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 
 });
 
@@ -182,20 +238,28 @@ router.get("/grupa", (req, res) => {
 
 router.put("/grupa", (req, res) => {
     db.Grupa.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("grupa je izmijenjena"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Grupa je izmijenjena"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/grupa/:id", (req, res) => {
     db.Grupa.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Grupa je obrisana"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Grupa je obrisana"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
@@ -204,8 +268,12 @@ router.delete("/grupa/:id", (req, res) => {
 router.post("/student", (req, res) => {
 
     db.Student.create({
-        naziv: req.body.naziv
-    }).then(() => res.send("Student je kreiran"));
+            naziv: req.body.naziv
+        }).then(() => res.send("Student je kreiran"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 
 });
 
@@ -221,20 +289,28 @@ router.get("/grupa", (req, res) => {
 
 router.put("/grupa", (req, res) => {
     db.Student.update({
-        naziv: req.body.naziv
-    }, {
-        where: { id: req.body.id }
-    }).then(() => res.send("Student je izmijenjen"));
+            naziv: req.body.naziv
+        }, {
+            where: { id: req.body.id }
+        }).then(() => res.send("Student je izmijenjen"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
 
 router.delete("/grupa/:id", (req, res) => {
     db.Student.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(() => res.send("Student je obrisan"));
+            where: {
+                id: req.params.id
+            }
+        }).then(() => res.send("Student je obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
 });
 
 
