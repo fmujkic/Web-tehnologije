@@ -21,7 +21,6 @@ router.post("/predmet", (req, res) => {
 
 });
 
-
 router.get("/predmet", (req, res) => {
     db.Predmet.findAll().then((predmeti) => {
         res.send(predmeti);
@@ -43,8 +42,6 @@ router.put("/predmet", (req, res) => {
         });
 });
 
-
-
 router.delete("/predmet/:id", (req, res) => {
     db.Predmet.destroy({
             where: {
@@ -58,11 +55,9 @@ router.delete("/predmet/:id", (req, res) => {
 });
 
 
-
 //Tip CRUD
 
 router.post("/tip", (req, res) => {
-
     db.Tip.create({
             naziv: req.body.naziv
         }).then(() => res.send("Tip je kreiran"))
@@ -70,9 +65,7 @@ router.post("/tip", (req, res) => {
             if (err)
                 console.log(err);
         });
-
 });
-
 
 router.get("/tip", (req, res) => {
     db.Tip.findAll().then((tipovi) => {
@@ -94,8 +87,6 @@ router.put("/tip", (req, res) => {
                 console.log(err);
         });
 });
-
-
 
 router.delete("/tip/:id", (req, res) => {
     db.Tip.destroy({
@@ -122,7 +113,6 @@ router.post("/dan", (req, res) => {
         });
 });
 
-
 router.get("/dan", (req, res) => {
     db.Dan.findAll().then((dani) => {
         res.send(dani);
@@ -143,8 +133,6 @@ router.put("/dan", (req, res) => {
                 console.log(err);
         });
 });
-
-
 
 router.delete("/dan/:id", (req, res) => {
     db.Tip.destroy({
@@ -171,7 +159,6 @@ router.post("/aktivnost", (req, res) => {
         });
 });
 
-
 router.get("/aktivnost", (req, res) => {
     db.Aktivnost.findAll().then((aktivnosti) => {
         res.send(aktivnosti);
@@ -197,8 +184,6 @@ router.put("/aktivnost", (req, res) => {
         });
 });
 
-
-
 router.delete("/aktivnost/:id", function(req, res) {
     db.Aktivnost.destroy({
             where: {
@@ -215,7 +200,6 @@ router.delete("/aktivnost/:id", function(req, res) {
 //Grupa CRUD
 
 router.post("/grupa", (req, res) => {
-
     db.Grupa.create({
             naziv: req.body.naziv
         }).then(() => res.send("Grupa je kreirana"))
@@ -223,9 +207,7 @@ router.post("/grupa", (req, res) => {
             if (err)
                 console.log(err);
         });
-
 });
-
 
 router.get("/grupa", (req, res) => {
     db.Grupa.findAll().then((grupe) => {
@@ -248,8 +230,6 @@ router.put("/grupa", (req, res) => {
         });
 });
 
-
-
 router.delete("/grupa/:id", (req, res) => {
     db.Grupa.destroy({
             where: {
@@ -266,19 +246,17 @@ router.delete("/grupa/:id", (req, res) => {
 //Student CRUD
 
 router.post("/student", (req, res) => {
-
     db.Student.create({
-            naziv: req.body.naziv
+            ime: req.body.ime
+
         }).then(() => res.send("Student je kreiran"))
         .catch((err) => {
             if (err)
                 console.log(err);
         });
-
 });
 
-
-router.get("/grupa", (req, res) => {
+router.get("/student", (req, res) => {
     db.Student.findAll().then((grupe) => {
         res.send(grupe);
     }).catch((err) => {
@@ -299,8 +277,6 @@ router.put("/grupa", (req, res) => {
         });
 });
 
-
-
 router.delete("/grupa/:id", (req, res) => {
     db.Student.destroy({
             where: {
@@ -312,11 +288,6 @@ router.delete("/grupa/:id", (req, res) => {
                 console.log(err);
         });
 });
-
-
-
-
-
 
 
 

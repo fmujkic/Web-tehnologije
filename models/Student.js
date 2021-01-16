@@ -10,10 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         index: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-            },
+            allowNull: true,
+
         },
     });
 
