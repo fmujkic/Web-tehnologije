@@ -2,15 +2,10 @@
 <html>
 
 <head>
-
 </head>
 
 <body>
-
     <div class="form">
-
-
-
 
         <textarea id="text" name="text" rows="10" cols="150">Neko Nekić,12345</textarea>
 
@@ -24,12 +19,11 @@
         </select>
 
 
-
-
         <button type="submit" id="btn-submit">Pošalji</button>
     </div>
 
     <script>
+        //uzimanje vrijednosti iz forme
         const form = {
             tekst: document.getElementById("text"),
             grupa: document.getElementById("grupe"),
@@ -37,10 +31,9 @@
         };
 
 
+        //funkcija za ubacivanje u bazu nakon sto se student uzme iz textarea
 
         function ubacivanjeUBazu(ime, index) {
-
-
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://localhost:3011/v2/student', true);
@@ -50,66 +43,42 @@
                 console.log(this.responseText);
             };
 
-
-
             xhr.send('ime=' + ime + '&index=' + index);
 
         };
 
 
-
-
-
-
-
+        //listener koji ceka pritisak na dugme pošalji
         form.submit.addEventListener('click', () => {
-
-            console.log("pritisnuto");
-
 
             var zahtjev = new XMLHttpRequest();
             zahtjev.onreadystatechange = function() {
                 if (zahtjev.readyState == 4 && zahtjev.status == 200) {
                     var jsonRez = JSON.parse(zahtjev.responseText);
 
-
                     //Uzimanje vrijednoti iz textarea i stavljanje u bazu
 
                     const data = form.tekst.value;
-
-                    form.tekst.value = "";
+                    form.tekst.value = ""; //ocistimo textarea
                     const ispis = data.toString();
                     let pom = data.toString('utf-8').split("\n");
                     let studenti = [];
 
                     for (let i = 0; i < pom.length; i++) {
                         let vrijednosti = pom[i].split(",");
-                        let neko = {
-                            ime: vrijednosti[0],
-                            index: vrijednosti[1]
-                        };
 
-
-
-
-                        studenti.push(neko);
-                        // form.tekst.value = provjeraBazeZaOsobu(vrijednosti[0], vrijednosti[1]);
 
                         var validacijaStudenta = true;
 
-
-
+                        //VALIDACIJA--prolazimo kroz bazu i trazimo da li ima student sa istim indexom --treba malo doraditi ali radi
                         jsonRez.forEach((red) => {
-
-
 
                             if (vrijednosti[1] == red['index']) {
                                 form.tekst.value += "Student " + vrijednosti[0] + " nije kreiran jer postoji student " + red['ime'] + " sa istim indexom " + vrijednosti[1] + "\n";
                                 validacijaStudenta = false;
                             }
 
-
-                            //Ubacujemo u Bazu vrijednost neko
+                            //Ubacujemo u Bazu vrijednost ukoliko je prosao validaciju
                             if (validacijaStudenta)
                                 ubacivanjeUBazu(vrijednosti[0], vrijednosti[1]);
 
@@ -119,19 +88,16 @@
 
                 }
             };
+
+            //uzimamo studente iz baze preko rute
             zahtjev.open("GET", "http://localhost:3011/v2/student", true);
             zahtjev.setRequestHeader("Content-Type", "application/json");
             zahtjev.send();
 
-
-
-
-
-
         });
 
 
-
+        //funkcija koja uzima sve grupe iz baze i stavlja ih u dropdown listu
 
         function ucitajGrupe() {
 
@@ -155,20 +121,14 @@
         }
 
 
+        //poziv funkcije pri svakom refreshovanju stranice
         window.onload = function() {
             ucitajGrupe();
         };
     </script>
 
 
-
-
-
-
     </div>
-
-
-
 
 
 </body>
