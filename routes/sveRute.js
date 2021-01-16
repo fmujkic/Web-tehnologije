@@ -201,13 +201,17 @@ router.delete("/aktivnost/:id", function(req, res) {
 
 router.post("/grupa", (req, res) => {
     db.Grupa.create({
-            naziv: req.body.naziv
+            naziv: req.body.naziv,
+            PremetID: 1
         }).then(() => res.send("Grupa je kreirana"))
         .catch((err) => {
             if (err)
                 console.log(err);
         });
 });
+
+
+
 
 router.get("/grupa", (req, res) => {
     db.Grupa.findAll().then((grupe) => {
@@ -247,14 +251,18 @@ router.delete("/grupa/:id", (req, res) => {
 
 router.post("/student", (req, res) => {
     db.Student.create({
-            ime: req.body.ime
+        ime: req.body.ime,
+        index: req.body.index
 
-        }).then(() => res.send("Student je kreiran"))
-        .catch((err) => {
-            if (err)
-                console.log(err);
-        });
+    }).then((student) => {
+        res.send(student)
+    }).catch((err) => {
+        if (err)
+            console.log(err);
+    });
 });
+
+
 
 router.get("/student", (req, res) => {
     db.Student.findAll().then((grupe) => {
@@ -265,9 +273,10 @@ router.get("/student", (req, res) => {
     });
 });
 
-router.put("/grupa", (req, res) => {
+router.put("/student", (req, res) => {
     db.Student.update({
-            naziv: req.body.naziv
+            naziv: req.body.naziv,
+            index: req.body.index
         }, {
             where: { id: req.body.id }
         }).then(() => res.send("Student je izmijenjen"))
@@ -277,7 +286,7 @@ router.put("/grupa", (req, res) => {
         });
 });
 
-router.delete("/grupa/:id", (req, res) => {
+router.delete("/student/:id", (req, res) => {
     db.Student.destroy({
             where: {
                 id: req.params.id

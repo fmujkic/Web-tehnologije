@@ -20,23 +20,17 @@ app.use("/v2", rute);
 
 app.get("/studenti.html", (req, res) => {
 
-    res.sendFile('proba.html', { root: __dirname })
+    res.sendFile('studenti.html', { root: __dirname })
 
 
 });
 
 
-app.get("/proba.html", (req, res) => {
-
-    res.sendFile('proba.html', { root: __dirname })
-
-
-});
 
 
 
 db.sequelize.sync().then((req) => {
-    app.listen(3009, () => {
+    app.listen(3011, () => {
         console.log('Server pokrenut');
     });
 });

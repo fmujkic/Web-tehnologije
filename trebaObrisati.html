@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <h1>Unos studenta</h1>
+
+    <div class="forma">
+
+
+        <form>
+            <textarea id="text" name="text" rows="4" cols="50">Neko Nekić,12345</textarea>
+
+            <label for="grupe">Odaberite grupu</label>
+
+            <select name="grupe" id="grupe">
+
+        <option value="grupa1">grupa1</option>
+        <option value="grupa2">grupa2</option>
+
+    </select>
+
+
+            <br><br>
+            <button type="submit" id="slanje">Pošalji</button>
+        </form>
+
+
+
+    </div>
+    <script>
+        function ucitajPredmete() {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaPredmeti = document.getElementById("listaPredmeti")
+                    while (listaPredmeti.firstChild) listaPredmeti.removeChild(listaPredmeti.firstChild);
+
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'];
+                        listaPredmeti.appendChild(li);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/predmeti", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+        let predmetPostoji = false;
+
+        function ucitajAktivnosti() {
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaAktivnosti = document.getElementById("listaAktivnosti")
+                    while (listaAktivnosti.firstChild) listaAktivnosti.removeChild(listaAktivnosti.firstChild);
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'] + "," + red['tip'] + "," + red['pocetak'] + "," + red['kraj'] + "," + red['dan'];
+                        listaAktivnosti.appendChild(li);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/aktivnosti", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+        function dodaj(pomURL) {
+            let zahtjev = new XMLHttpRequest();
+            const formData = new FormData(document.getElementById("glavnaForma"));
+            var obj = {};
+            formData.forEach(function(value, key) {
+                obj[key] = value;
+            });
+            var json = JSON.stringify(obj);
+
+
+            zahtjev.open("POST", "http://localhost:3000/" + pomURL, true);
+            zahtjev.setRequestHeader("Content-type", "application/json");
+            zahtjev.send(json);
+            ucitajAktivnosti();
+        }
+
+
+
+        const forma = {
+            text: document.getElementById("text"),
+            grupa: document.getElementById("grupe"),
+            submit: document.getElementById("slanje")
+        };
+
+        forma.submit.addEventListener('click', () => {
+
+            console.log("pritisnuto");
+
+        });
+
+
+
+
+
+        function ucitajPredmete() {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaPredmeti = document.getElementById("listaPredmeti")
+                    while (listaPredmeti.firstChild) listaPredmeti.removeChild(listaPredmeti.firstChild);
+
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'];
+                        listaPredmeti.appendChild(li);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/predmeti", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+
+
+
+
+        window.onload = function() {
+            ucitajGrupe();
+        };
+    </script>
+
+
+
+
+</body>
+
+</html>
