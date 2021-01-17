@@ -2,6 +2,13 @@ var express = require('express');
 var app = express();
 const db = require('./models');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,15 +29,18 @@ app.get("/studenti.html", (req, res) => {
 
     res.sendFile('studenti.html', { root: __dirname })
 
+});
+
+app.get("/unosRasporeda.html", (req, res) => {
+
+    res.sendFile('unosRasporeda.html', { root: __dirname })
 
 });
 
 
 
-
-
 db.sequelize.sync().then((req) => {
-    app.listen(3011, () => {
+    app.listen(3000, () => {
         console.log('Server pokrenut');
     });
 });

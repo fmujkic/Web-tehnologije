@@ -36,7 +36,7 @@
         function ubacivanjeUBazu(ime, index) {
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:3011/v2/student', true);
+            xhr.open('POST', 'http://localhost:3000/v2/student', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 // do something to response
@@ -90,7 +90,7 @@
             };
 
             //uzimamo studente iz baze preko rute
-            zahtjev.open("GET", "http://localhost:3011/v2/student", true);
+            zahtjev.open("GET", "http://localhost:3000/v2/student", true);
             zahtjev.setRequestHeader("Content-Type", "application/json");
             zahtjev.send();
 
@@ -115,7 +115,7 @@
                     });
                 }
             };
-            zahtjev.open("GET", "http://localhost:3011/v2/grupa", true);
+            zahtjev.open("GET", "http://localhost:3000/v2/grupa", true);
             zahtjev.setRequestHeader("Content-Type", "application/json");
             zahtjev.send();
         }
