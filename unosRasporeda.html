@@ -33,12 +33,12 @@
 
             <br> <br><label for="pocetakV">Početak časa:</label>
 
-            <br><input type="time" id="pocetakV" name="vrijemePocetka">
+            <br><input type="time" id="pocetakV" name="vrijemePocetka" min="09:00" step="1800" max="20:00">
 
 
             <br> <br><label for="krajV">Kraja časa:</label>
 
-            <br><input type="time" id="krajV" name="vrijemeKraja">
+            <br><input type="time" id="krajV" name="vrijemeKraja" min="09:00" step="1800" max="20:00">
 
 
             <br><label for="danSedmica">Dan u sedmici:</label>
@@ -121,8 +121,10 @@
                     listaAktivnosti = document.getElementById("listaAktivnosti")
                     while (listaAktivnosti.firstChild) listaAktivnosti.removeChild(listaAktivnosti.firstChild);
                     jsonRez.forEach((red) => {
+
                         const li = document.createElement("li");
-                        li.innerHTML = red['naziv'] + "," + red['tip'] + "," + red['pocetak'] + "," + red['kraj'] + "," + red['dan'];
+
+                        li.innerHTML = red['naziv'] + "," + red['pocetak'] + "," + red['kraj'];
                         listaAktivnosti.appendChild(li);
                     });
                 }

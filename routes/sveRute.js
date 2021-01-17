@@ -76,6 +76,23 @@ router.get("/tip", (req, res) => {
     });
 });
 
+
+router.get("/tipDaj", (req, res) => {
+    db.Tip.findOne({
+        where: {
+            id: req.body.id
+        }
+    }).then((tip) => {
+        res.send(tip.naziv);
+    }).catch((err) => {
+        if (err)
+            console.log(err);
+    });
+});
+
+
+
+
 router.put("/tip", (req, res) => {
     db.Tip.update({
             naziv: req.body.naziv
@@ -121,6 +138,20 @@ router.get("/dan", (req, res) => {
             console.log(err);
     });
 });
+
+router.get("/danDaj", (req, res) => {
+    db.Dan.findOne({
+        where: {
+            id: req.body.id
+        }
+    }).then((tip) => {
+        res.send(tip.naziv);
+    }).catch((err) => {
+        if (err)
+            console.log(err);
+    });
+});
+
 
 router.put("/dan", (req, res) => {
     db.Dan.update({
@@ -176,6 +207,22 @@ router.post("/aktivnost", (req, res) => {
             if (err)
                 console.log(err);
         });
+
+
+
+
+    db.Predmet.create({
+            naziv: req.body.naziv
+        }).then(() => res.send("Predmet je kreiran"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
+
+
+
+
+
 });
 
 router.get("/aktivnost", (req, res) => {
