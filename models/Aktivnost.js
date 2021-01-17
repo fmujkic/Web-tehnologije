@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         pocetak: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.TIME,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
         },
         kraj: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.TIME,
             allowNull: false,
             validate: {
                 notEmpty: true,

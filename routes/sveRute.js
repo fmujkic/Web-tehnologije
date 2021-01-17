@@ -151,7 +151,14 @@ router.delete("/dan/:id", (req, res) => {
 
 router.post("/aktivnost", (req, res) => {
     db.Aktivnost.create({
-            naziv: req.body.naziv
+            naziv: req.body.naziv,
+            pocetak: req.body.pocetak,
+            kraj: req.body.kraj,
+            PredmetId: req.body.PredmetID,
+            GrupaId: req.body.GrupaID,
+            DanId: req.body.DanID,
+            TipId: req.body.TipID,
+
         }).then(() => res.send("Aktivnost je kreirana"))
         .catch((err) => {
             if (err)

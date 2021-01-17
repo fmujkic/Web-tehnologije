@@ -10,7 +10,7 @@
 
 
     <div>
-        <form id="glavnaForma">
+        <form id="glavnaForma" class="form">
 
 
 
@@ -57,7 +57,8 @@
 
 
             <br><br><br><br>
-            <button id="btnAktivnost" onclick="dodaj('aktivnost')">Dodaj aktivnost</button>
+            <button type="submit" id="btn-submit">Dodaj aktivnost</button>
+
 
             <br><br>
         </form>
@@ -78,8 +79,12 @@
     <script type="text/javascript">
         const form = {
             nazivPredmeta: document.getElementById("nazivPredmeta"),
-            grupa: document.getElementById("grupe"),
+            tip: document.getElementById("tip"),
+            pocetak: document.getElementById("pocetakV"),
+            kraj: document.getElementById("krajV"),
+            dan: document.getElementById("danSedmica"),
             submit: document.getElementById("btn-submit")
+
         };
 
 
@@ -127,39 +132,23 @@
             zahtjev.send();
         }
 
-        function dodaj(pomURL) {
 
+        form.submit.addEventListener('click', () => {
 
-            let zahtjev = new XMLHttpRequest();
-            const formData = new FormData(document.getElementById("glavnaForma"));
-            var obj = {};
-            formData.forEach(function(value, key) {
-                obj[key] = value;
-            });
-            var json = JSON.stringify(obj);
-
-
-            zahtjev.open("POST", "http://localhost:3000/v2/" + pomURL, true);
-            zahtjev.setRequestHeader("Content-type", "application/json");
-            zahtjev.send(json);
-
-
-
-            /* var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:3000/v2/aktivnost', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                // do something to response
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
                 console.log(this.responseText);
             };
 
-            xhr.send('ime=' + ime + '&index=' + index);
-*/
+            //uzimamo studente iz baze preko rute
+            zahtjev.open("POST", "http://localhost:3000/v2/aktivnost", true);
+            zahtjev.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            console.log('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=1&TipID=1');
+            zahtjev.send('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=1&TipID=1');
+
+        });
 
 
-
-            ucitajAktivnosti();
-        }
 
         window.onload = function() {
             ucitajPredmete();
