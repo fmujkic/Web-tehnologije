@@ -135,11 +135,23 @@ router.put("/dan", (req, res) => {
 });
 
 router.delete("/dan/:id", (req, res) => {
-    db.Tip.destroy({
+    db.Dan.destroy({
             where: {
                 id: req.params.id
             }
         }).then(() => res.send("Dan je obrisan"))
+        .catch((err) => {
+            if (err)
+                console.log(err);
+        });
+});
+
+router.get("/danTrazi", (req, res) => {
+    db.Dan.findOne({
+            where: {
+                naziv: req.body.naziv,
+            }
+        }).then((dan) => res.send(dan))
         .catch((err) => {
             if (err)
                 console.log(err);
@@ -202,6 +214,7 @@ router.delete("/aktivnost/:id", function(req, res) {
                 console.log(err);
         });
 });
+
 
 
 //Grupa CRUD

@@ -34,9 +34,8 @@ module.exports = (sequelize, DataTypes) => {
         });
         Aktivnost.belongsTo(models.Grupa, {
             foreignKey: {
-                allowNull: false
+                allowNull: true
             },
-            onDelete: "cascade"
         });
         Aktivnost.belongsTo(models.Dan), {
             foreignKey: {

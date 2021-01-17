@@ -111,7 +111,7 @@
             zahtjev.send();
         }
 
-        let predmetPostoji = false;
+
 
         function ucitajAktivnosti() {
             var zahtjev = new XMLHttpRequest();
@@ -133,6 +133,8 @@
         }
 
 
+
+
         form.submit.addEventListener('click', () => {
 
             var zahtjev = new XMLHttpRequest();
@@ -140,11 +142,70 @@
                 console.log(this.responseText);
             };
 
+            var IdZaDan
+            var IdZaTip
+
+            switch (form.dan.value) {
+                case "ponedjeljak":
+                    IdZaDan = 1;
+                    break;
+
+                case "utorak":
+                    IdZaDan = 2;
+                    break;
+                case "srijeda":
+                    IdZaDan = 3;
+                    break;
+                case "četvrtak":
+                    IdZaDan = 4;
+                    break;
+                case "petak":
+                    IdZaDan = 5;
+                    break;
+                case "subota":
+                    IdZaDan = 6;
+                    break;
+                case "nedjelja":
+                    IdZaDan = 7;
+                    break;
+
+                default:
+                    IdZaDan = 1;
+
+
+            };
+
+            switch (form.tip.value) {
+                case "predavanje":
+                    IdZaTip = 1;
+                    break;
+
+                case "vježbe":
+                    IdZaDan = 2;
+                    break;
+
+
+                default:
+                    IdZaTip = 1;
+
+
+            };
+
+
+
+
+
+
+
+
+
+
+
             //uzimamo studente iz baze preko rute
             zahtjev.open("POST", "http://localhost:3000/v2/aktivnost", true);
             zahtjev.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            console.log('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=1&TipID=1');
-            zahtjev.send('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=1&TipID=1');
+            // console.log('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=' + IdZaDan + '&TipID=');
+            zahtjev.send('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=' + IdZaDan + '&TipID=' + IdZaTip);
 
         });
 
