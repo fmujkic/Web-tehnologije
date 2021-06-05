@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+
+
+    <div>
+        <form id="glavnaForma" class="form">
+
+
+
+            <label for="nazivPredmeta">Naziv predmeta:</label>
+
+            <br>
+
+            <input id="nazivPredmeta" type="text" name="naziv">
+
+            <br><br>
+
+            <label for="tip">Tip nastave:</label>
+
+
+            <br><select name="tip" id="tip">
+                            <option value="predavanje">predavanje</option>
+                            <option value="vjezbe">vježbe</option>
+                        </select>
+
+
+            <br> <br><label for="pocetakV">Početak časa:</label>
+
+            <br><input type="time" id="pocetakV" name="vrijemePocetka" min="09:00" step="1800" max="20:00">
+
+
+            <br> <br><label for="krajV">Kraja časa:</label>
+
+            <br><input type="time" id="krajV" name="vrijemeKraja" min="09:00" step="1800" max="20:00">
+
+
+            <br><label for="danSedmica">Dan u sedmici:</label>
+
+            <br>
+            <select name="dan" id="danSedmica">
+                            <option value="ponedjeljak">ponedjeljak</option>
+                            <option value="utorak">utorak</option>
+                            <option value="srijeda">srijeda</option>
+                            <option value="cetvrtak">četvrtak</option>
+                            <option value="petak">petak</option>
+                            <option value="subota">subota</option>
+                            <option value="nedjelja">nedjelja</option>
+                        </select>
+
+
+
+            <br><br><br><br>
+            <button type="submit" id="btn-submit">Dodaj aktivnost</button>
+
+
+            <br><br>
+        </form>
+
+
+    </div>
+
+    <div>
+        <h2>Predmeti</h2>
+        <ul id="listaPredmeti">
+        </ul>
+        <br>
+        <h2>Aktivnosti</h2>
+        <ul id="listaAktivnosti">
+        </ul>
+
+    </div>
+    <script type="text/javascript">
+        const form = {
+            nazivPredmeta: document.getElementById("nazivPredmeta"),
+            tip: document.getElementById("tip"),
+            pocetak: document.getElementById("pocetakV"),
+            kraj: document.getElementById("krajV"),
+            dan: document.getElementById("danSedmica"),
+            submit: document.getElementById("btn-submit")
+
+        };
+
+
+
+
+        function ucitajPredmete() {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaPredmeti = document.getElementById("listaPredmeti")
+                    while (listaPredmeti.firstChild) listaPredmeti.removeChild(listaPredmeti.firstChild);
+
+                    jsonRez.forEach((red) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = red['naziv'];
+                        listaPredmeti.appendChild(li);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/v2/predmet", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+
+
+        function ucitajAktivnosti() {
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaAktivnosti = document.getElementById("listaAktivnosti")
+                    while (listaAktivnosti.firstChild) listaAktivnosti.removeChild(listaAktivnosti.firstChild);
+                    jsonRez.forEach((red) => {
+
+                        const li = document.createElement("li");
+
+                        li.innerHTML = red['naziv'] + "," + red['pocetak'] + "," + red['kraj'];
+                        listaAktivnosti.appendChild(li);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/v2/aktivnost", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+
+
+
+        form.submit.addEventListener('click', () => {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                console.log(this.responseText);
+            };
+
+            var IdZaDan
+            var IdZaTip
+
+            switch (form.dan.value) {
+                case "ponedjeljak":
+                    IdZaDan = 1;
+                    break;
+
+                case "utorak":
+                    IdZaDan = 2;
+                    break;
+                case "srijeda":
+                    IdZaDan = 3;
+                    break;
+                case "četvrtak":
+                    IdZaDan = 4;
+                    break;
+                case "petak":
+                    IdZaDan = 5;
+                    break;
+                case "subota":
+                    IdZaDan = 6;
+                    break;
+                case "nedjelja":
+                    IdZaDan = 7;
+                    break;
+
+                default:
+                    IdZaDan = 1;
+
+
+            };
+
+            switch (form.tip.value) {
+                case "predavanje":
+                    IdZaTip = 1;
+                    break;
+
+                case "vježbe":
+                    IdZaDan = 2;
+                    break;
+
+
+                default:
+                    IdZaTip = 1;
+
+
+            };
+
+
+
+
+
+
+
+
+
+
+
+            //uzimamo studente iz baze preko rute
+            zahtjev.open("POST", "http://localhost:3000/v2/aktivnost", true);
+            zahtjev.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // console.log('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=' + IdZaDan + '&TipID=');
+            zahtjev.send('naziv=' + form.nazivPredmeta.value + '&pocetak=' + document.getElementById("pocetakV").value + '&kraj=' + form.kraj.value + '&PredmetID=1&GrupaID=1&DanID=' + IdZaDan + '&TipID=' + IdZaTip);
+
+        });
+
+
+
+        window.onload = function() {
+            ucitajPredmete();
+            ucitajAktivnosti();
+        };
+    </script>
+</body>
+
+</HTML>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div class="form">
+
+        <textarea id="text" name="text" rows="10" cols="150">Neko Nekić,12345</textarea>
+
+        <label for="grupe">Odaberite grupu</label>
+
+        <select name="grupe" id="grupe">
+
+        <option value="grupa1">grupa1</option>
+        <option value="grupa2">grupa2</option>
+
+        </select>
+
+
+        <button type="submit" id="btn-submit">Pošalji</button>
+    </div>
+
+    <script>
+        //uzimanje vrijednosti iz forme
+        const form = {
+            tekst: document.getElementById("text"),
+            grupa: document.getElementById("grupe"),
+            submit: document.getElementById("btn-submit")
+        };
+
+
+        //funkcija za ubacivanje u bazu nakon sto se student uzme iz textarea
+
+        function ubacivanjeUBazu(ime, index) {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:3000/v2/student', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                // do something to response
+                console.log(this.responseText);
+            };
+
+            xhr.send('ime=' + ime + '&index=' + index);
+
+        };
+
+
+        //listener koji ceka pritisak na dugme pošalji
+        form.submit.addEventListener('click', () => {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+
+                    //Uzimanje vrijednoti iz textarea i stavljanje u bazu
+
+                    const data = form.tekst.value;
+                    form.tekst.value = ""; //ocistimo textarea
+                    const ispis = data.toString();
+                    let pom = data.toString('utf-8').split("\n");
+                    let studenti = [];
+
+                    for (let i = 0; i < pom.length; i++) {
+                        let vrijednosti = pom[i].split(",");
+
+
+                        var validacijaStudenta = true;
+
+                        //VALIDACIJA--prolazimo kroz bazu i trazimo da li ima student sa istim indexom --treba malo doraditi ali radi
+                        jsonRez.forEach((red) => {
+
+                            if (vrijednosti[1] == red['index']) {
+                                form.tekst.value += "Student " + vrijednosti[0] + " nije kreiran jer postoji student " + red['ime'] + " sa istim indexom " + vrijednosti[1] + "\n";
+                                validacijaStudenta = false;
+                            }
+
+                            //Ubacujemo u Bazu vrijednost ukoliko je prosao validaciju
+                            if (validacijaStudenta)
+                                ubacivanjeUBazu(vrijednosti[0], vrijednosti[1]);
+
+
+                        });
+                    }
+
+                }
+            };
+
+            //uzimamo studente iz baze preko rute
+            zahtjev.open("GET", "http://localhost:3000/v2/student", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+
+        });
+
+
+        //funkcija koja uzima sve grupe iz baze i stavlja ih u dropdown listu
+
+        function ucitajGrupe() {
+
+            var zahtjev = new XMLHttpRequest();
+            zahtjev.onreadystatechange = function() {
+                if (zahtjev.readyState == 4 && zahtjev.status == 200) {
+                    var jsonRez = JSON.parse(zahtjev.responseText);
+                    listaGrupa = document.getElementById("grupe")
+                    while (listaGrupa.firstChild) listaGrupa.removeChild(listaGrupa.firstChild);
+
+                    jsonRez.forEach((red) => {
+                        const option = document.createElement("option");
+                        option.innerHTML = red['naziv'];
+                        listaGrupa.appendChild(option);
+                    });
+                }
+            };
+            zahtjev.open("GET", "http://localhost:3000/v2/grupa", true);
+            zahtjev.setRequestHeader("Content-Type", "application/json");
+            zahtjev.send();
+        }
+
+
+        //poziv funkcije pri svakom refreshovanju stranice
+        window.onload = function() {
+            ucitajGrupe();
+        };
+    </script>
+
+
+    </div>
+
+
+</body>
+
+</html>
